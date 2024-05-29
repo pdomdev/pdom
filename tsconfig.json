@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+      "target": "ESNext",
+      "useDefineForClassFields": true,
+      "module": "ESNext",
+      "lib": ["ES2020", "DOM", "DOM.Iterable"],
+      "skipLibCheck": true,
+  
+      /* Bundler mode */
+      "moduleResolution": "bundler",
+      "resolveJsonModule": true,
+      "isolatedModules": true,
+      "outDir": "esm",
+  
+      /* Linting */
+      "noFallthroughCasesInSwitch": true
+    },
+    "include": ["hosting", "library"]
+  }
+  
