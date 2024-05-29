@@ -1,13 +1,15 @@
 {
   "name": "parallel-dom",
-  "version": "0.0.1",
+  "version": "0.0.5",
   "description": "pdom",
   "main": "cjs/library/index.js",
   "module": "esm/library/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "vite",
-    "build": "tsc && vite build"
+    "demo": "vite -c vite.demo.config.ts",
+    "build": "tsc && vite build",
+    "prepublishOnly": "tsc && tsc --outDir cjs --module commonjs --moduleResolution node"
   },
   "keywords": [],
   "author": "",
@@ -18,6 +20,7 @@
   },
   "dependencies": {
     "@vercel/analytics": "^1.3.1",
+    "parallel-dom": "^0.0.5",
     "promise-postmessage": "^2.3.0"
   }
 }

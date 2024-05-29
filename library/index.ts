@@ -15,7 +15,7 @@ function generateIframeSrc() {
     return `https://${randomUUID}.${DOMAIN_SUFFIX}?${params.toString()}`;
 }
 
-export class PDom {
+export default class PDom {
     private iframeEl: HTMLIFrameElement;
     private callbacks: Record<string, Function[]> = {};
     private options: PDomOptions;
@@ -74,8 +74,7 @@ export class PDom {
     }
 
     private subscribeToIframeMessages() {
-        onMessage((event) => {
-            const { data } = event;
+        onMessage((data) => {
             console.log('Parent received message:', data);
             return this.executeCallbacks(data);
         }, this.iframeEl.contentWindow);

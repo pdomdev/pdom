@@ -16,8 +16,8 @@ const scheme = params.get('scheme');
 const hostOrigin = `${scheme}://${host}`;
 
 console.log('hostOrigin', hostOrigin);
-const event = await sendMessage(window.parent, { type: 'pdom-ready' }, hostOrigin);
-const { nodeType, attrs, scriptUrl } = event.data;
+const reponse = await sendMessage(window.parent, { type: 'pdom-ready' }, hostOrigin);
+const { nodeType, attrs, scriptUrl } = reponse;
 createElement(nodeType, attrs);
 const fqnScriptUrl = new URL(scriptUrl, hostOrigin).href;
 
