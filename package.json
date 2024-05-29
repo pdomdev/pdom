@@ -1,6 +1,6 @@
 {
-  "name": "pdom",
-  "version": "1.0.0",
+  "name": "parallel-dom",
+  "version": "0.0.1",
   "description": "pdom",
   "main": "cjs/library/index.js",
   "module": "esm/library/index.js",
