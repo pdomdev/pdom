@@ -1,8 +1,7 @@
 {
   "name": "parallel-dom",
-  "version": "0.0.8",
+  "version": "0.0.10",
   "description": "pdom",
-  "main": "cjs/index.js",
   "module": "esm/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,7 +9,7 @@
     "demo": "vite -c vite.demo.config.ts",
     "build-demo": "vite build -c vite.demo.config.ts",
     "build": "tsc && vite build",
-    "prepublishOnly": "tsc && tsc --outDir cjs --module commonjs --moduleResolution node"
+    "prepublishOnly": "tsc"
   },
   "keywords": [],
   "author": "",
