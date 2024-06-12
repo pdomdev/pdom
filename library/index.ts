@@ -2,17 +2,19 @@ import { onMessage, sendMessage } from 'promise-postmessage';
 
 export interface PDomOptions {
     scriptUrl: string;
+    domainUrl?: string;
 }
 
 const DOMAIN_SUFFIX = 'pdom.dev';
 
-function generateIframeSrc() {
+function generateIframeSrc(url?: string) {
     const randomUUID = crypto.randomUUID().slice(0, 8);
     const params = new URLSearchParams({
         host: window.location.host,
         scheme: window.location.protocol.replace(':', ''),
     });
-    return `https://${randomUUID}.${DOMAIN_SUFFIX}?${params.toString()}`;
+    const host = url || `${randomUUID}.${DOMAIN_SUFFIX}`;
+    return `https://${host}?${params.toString()}`;
 }
 
 export default class PDom {
@@ -35,7 +37,7 @@ export default class PDom {
         this.options = options;
 
         const { nodeType, attrs } = this.getNodeTypeAndAttrs(el);
-        const iframeSrc = generateIframeSrc();
+        const iframeSrc = generateIframeSrc(options.domainUrl);
         this.iframeEl = this.getIframeEl(iframeSrc);
         el.replaceChildren(this.iframeEl);
         this.subscribeToIframeMessages();
@@ -81,15 +83,14 @@ export default class PDom {
     }
 
     private async executeCallbacks(data) {
-        return new Promise((resolve, reject) => {
-            let retVal = null;
-            if (data.type && this.callbacks[data.type]) {
-                this.callbacks[data.type].forEach(async (cb) => {
-                    retVal = await cb(data);
-                });
+        let retVal = null;
+        if (data.type && this.callbacks[data.type]) {
+            // call each callback and await for and override the return value
+            for (let cb of this.callbacks[data.type]) {
+                retVal = await cb(data);
             }
-            resolve(retVal);
-        });
+        }
+        return retVal;
     }
 
     private on(type: string, cb: Function) {

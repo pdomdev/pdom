@@ -6,12 +6,7 @@ export default defineConfig({
     root: 'demo',
     build: {
         target: 'esnext',
-        outDir: 'dist',
-        rollupOptions: {
-            input: {
-                main: resolve(__dirname, 'demo/index.html'),
-                nested: resolve(__dirname, 'demo/worker.ts'),
-            },
-        },
+        outDir: 'dist2',
+        assetsInlineLimit: 0,
     }
 })

@@ -16,6 +16,6 @@
       /* Linting */
       "noFallthroughCasesInSwitch": true
     },
-    "include": ["library"]
+    "include": ["library", "demo"]
   }
   

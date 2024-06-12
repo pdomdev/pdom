@@ -1,3 +1,5 @@
+import {} from 'foo';
+
 const el = document.querySelector('#parallel');
 
 if (!el) {
