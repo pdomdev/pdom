@@ -16,13 +16,14 @@ const scheme = params.get('scheme');
 const hostOrigin = `${scheme}://${host}`;
 
 console.log('hostOrigin', hostOrigin);
-const reponse = await sendMessage(window.parent, { type: 'pdom-ready' }, hostOrigin);
+const reponse = await sendMessage(window.parent, { type: 'pdom-init' }, hostOrigin);
 const { nodeType, attrs, scriptUrl } = reponse;
 createElement(nodeType, attrs);
 const fqnScriptUrl = new URL(scriptUrl, hostOrigin).href;
 
-import(
+await import(
     /* @vite-ignore */
     fqnScriptUrl
 );
 
+sendMessage(window.parent, { type: 'pdom-loaded' }, hostOrigin);
