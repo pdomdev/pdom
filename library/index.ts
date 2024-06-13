@@ -46,7 +46,7 @@ export default class PDom {
         }
         this.options = options;
 
-        const { nodeType, attrs } = this.getNodeTypeAndAttrs(el);
+        const { nodeType, attrs } = this.getNodeTypeAndAttrs(this.el);
         const iframeSrc = generateIframeSrc(options.domainUrl);
         this.iframeEl = this.getIframeEl(iframeSrc);
         this.on('pdom-init', async (data) => {
