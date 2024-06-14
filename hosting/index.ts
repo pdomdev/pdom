@@ -19,7 +19,9 @@ console.log('hostOrigin', hostOrigin);
 const reponse = await sendMessage(window.parent, { type: 'pdom-init' }, hostOrigin);
 const { nodeType, attrs, scriptUrl } = reponse;
 createElement(nodeType, attrs);
-const fqnScriptUrl = new URL(scriptUrl, hostOrigin).href;
+const fqnScriptUrl = (scriptUrl.startsWith('http'))
+    ? scriptUrl
+    : new URL(scriptUrl, hostOrigin).href;
 
 await import(
     /* @vite-ignore */

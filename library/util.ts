@@ -1,0 +1,5 @@
+// extract the script url from a function which has a dynamic import
+// for the script url.
+export function getScriptUrlFromFunction(fn: () => Promise<any>) {
+    return new URL(fn.toString().match(/import\(["'](.+)["']\)/)[1], import.meta.url).href;
+}

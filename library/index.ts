@@ -1,8 +1,10 @@
 import { onMessage, sendMessage } from 'promise-postmessage';
+import { getScriptUrlFromFunction } from './util';
 
 export interface PDomOptions {
     scriptUrl: string;
     domainUrl?: string;
+    noIframe?: boolean;
 }
 
 const DOMAIN_SUFFIX = 'pdom.dev';
@@ -18,15 +20,21 @@ function generateIframeSrc(url?: string) {
 }
 
 export default class PDom {
-    private iframeEl: HTMLIFrameElement;
+    #iframeEl: HTMLIFrameElement;
     private callbacks: Record<string, Function[]> = {};
     private options: PDomOptions;
     private el: HTMLElement;
+    #iframeSrc: string;
 
-    public onLoad: () => void;
-    public onError: (err) => void;
+    public get iframeSrc() {
+        return this.#iframeSrc;
+    }
 
-    constructor(_el: HTMLElement | string, options: PDomOptions | string) {
+    public get containerEl() {
+        return this.#iframeEl || this.el;
+    }
+
+    constructor(_el: HTMLElement | string, options: PDomOptions | (() => Promise<any>)) {
         console.log('PDom constructor');
         if (!_el) {
             throw new Error('Element is required');
@@ -41,34 +49,61 @@ export default class PDom {
             this.el = _el;
         }
 
-        if (typeof options === 'string') {
-            options = { scriptUrl: options };
+        if (typeof options === 'function') {
+            options = { scriptUrl: getScriptUrlFromFunction(options) };
         }
         this.options = options;
 
+        if (this.options.noIframe) {
+            return;
+        }
+
         const { nodeType, attrs } = this.getNodeTypeAndAttrs(this.el);
-        const iframeSrc = generateIframeSrc(options.domainUrl);
-        this.iframeEl = this.getIframeEl(iframeSrc);
+        this.#iframeSrc = generateIframeSrc(options.domainUrl);
+        this.#iframeEl = this.getIframeEl(this.#iframeSrc);
         this.on('pdom-init', async (data) => {
             const { scriptUrl } = this.options;
             return { nodeType, attrs, scriptUrl };
         });
     }
 
+    /**
+     * Method to render the iframe and load the script.
+     * @returns Promise<void> which resolves when the iframe is loaded and rejects in case of an error.
+     */
     public render() {
-        this.on('pdom-loaded', () => {
-            this.onLoad?.();
+        if (this.options.noIframe) {
+            return this.renderNoIframe();
+        }
+        return new Promise<void>((resolve, reject) => {
+            this.on('pdom-loaded', () => {
+                resolve();
+            });
+
+            this.on('pdom-error', (err) => {
+                reject(err);
+            });
+
+            this.#iframeEl.onerror = reject;
+
+            this.el.replaceChildren(this.#iframeEl);
+            this.subscribeToIframeMessages();
         });
+    }
 
-        this.on('pdom-error', (err) => {
-            this.onError?.(err);
+    private renderNoIframe() {
+        return new Promise<void>((resolve, reject) => {
+            const { scriptUrl } = this.options;
+            const fqnScriptUrl = new URL(scriptUrl, window.location.origin).href;
+            import(
+                /* @vite-ignore */
+                fqnScriptUrl
+            ).then(() => {
+                resolve();
+            }).catch((err) => {
+                reject(err);
+            });
         });
-
-        this.iframeEl.onerror = this.onError as any;
-
-        this.el.replaceChildren(this.iframeEl);
-        this.subscribeToIframeMessages();
-
     }
 
     private getNodeTypeAndAttrs(el: HTMLElement) {
@@ -102,7 +137,7 @@ export default class PDom {
     private subscribeToIframeMessages() {
         onMessage((data) => {
             return this.executeCallbacks(data);
-        }, this.iframeEl);
+        }, this.#iframeEl);
     }
 
     private async executeCallbacks(data) {
