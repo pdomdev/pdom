@@ -1,8 +1,9 @@
 {
   "name": "parallel-dom",
-  "version": "0.3.0",
+  "version": "0.3.2",
   "description": "pdom",
-  "module": "esm/index.js",
+  "module": "esm/library/index.js",
+  "types": "esm/library/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "vite",
