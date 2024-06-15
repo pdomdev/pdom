@@ -2,7 +2,7 @@ import { onMessage, sendMessage } from 'promise-postmessage';
 import { getScriptUrlFromFunction } from './util';
 
 export interface PDomOptions {
-    scriptUrl: string;
+    script: () => Promise<any>;
     domainUrl?: string;
     noIframe?: boolean;
 }
@@ -22,7 +22,7 @@ function generateIframeSrc(url?: string) {
 export default class PDom {
     #iframeEl: HTMLIFrameElement;
     private callbacks: Record<string, Function[]> = {};
-    private options: PDomOptions;
+    private options: PDomOptions & { scriptUrl?: string };
     private el: HTMLElement;
     #iframeSrc: string;
 
@@ -50,9 +50,10 @@ export default class PDom {
         }
 
         if (typeof options === 'function') {
-            options = { scriptUrl: getScriptUrlFromFunction(options) };
+            options = { script: options };
         }
         this.options = options;
+        this.options.scriptUrl = getScriptUrlFromFunction(this.options.script);
 
         if (this.options.noIframe) {
             return;
@@ -94,10 +95,9 @@ export default class PDom {
     private renderNoIframe() {
         return new Promise<void>((resolve, reject) => {
             const { scriptUrl } = this.options;
-            const fqnScriptUrl = new URL(scriptUrl, window.location.origin).href;
             import(
                 /* @vite-ignore */
-                fqnScriptUrl
+                scriptUrl
             ).then(() => {
                 resolve();
             }).catch((err) => {
@@ -141,14 +141,10 @@ export default class PDom {
     }
 
     private async executeCallbacks(data) {
-        let retVal = null;
-        if (data.type && this.callbacks[data.type]) {
-            // call each callback and await for and override the return value
-            for (let cb of this.callbacks[data.type]) {
-                retVal = await cb(data);
-            }
+        if (data._type && this.callbacks[data._type]) {
+            // call each callback return the first resolved promise.
+            return Promise.race(this.callbacks[data._type].map(async cb => await cb(data)));
         }
-        return retVal;
     }
 
     private on(type: string, cb: Function) {
