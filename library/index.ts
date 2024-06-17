@@ -9,14 +9,14 @@ export interface PDomOptions {
 
 const DOMAIN_SUFFIX = 'pdom.dev';
 
-function generateIframeSrc(url?: string) {
+function generateIframeSrc(origin?: string) {
     const randomUUID = crypto.randomUUID().slice(0, 8);
     const params = new URLSearchParams({
         host: window.location.host,
         scheme: window.location.protocol.replace(':', ''),
     });
-    const host = url || `${randomUUID}.${DOMAIN_SUFFIX}`;
-    return `https://${host}?${params.toString()}`;
+    origin = origin || `https://${randomUUID}.${DOMAIN_SUFFIX}`;
+    return `${origin}?${params.toString()}`;
 }
 
 export default class PDom {
