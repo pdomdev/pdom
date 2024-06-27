@@ -4,6 +4,9 @@ import { resolve } from 'path';
 
 export default defineConfig({
     root: 'demo',
+    resolve: {
+        preserveSymlinks: true,
+    },
     build: {
         target: 'esnext',
         outDir: 'dist',
