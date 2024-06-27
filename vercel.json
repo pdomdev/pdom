@@ -1,6 +1,6 @@
 {
     "headers": [{
-        "source": "/.*",
+        "source": "/(.*)",
         "headers": [{
             "key": "Origin-Agent-Cluster",
             "value": "?1"
