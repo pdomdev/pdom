@@ -1,7 +1,54 @@
 <html>
+    <head>
+        <style>
+            body {
+                margin: 10px 0;
+                font-family: monospace;
+            }
+
+            .split {
+                display: flex;
+                height: 50vh;
+                width: 100vw;
+                overflow: hidden;
+            }
+
+            .separator {
+                flex: 0 0 1px;
+                background-color: #d3d3d8;
+            }
+
+            .view {
+                flex: 0 0 50%;
+                border: none;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .content {
+                width: 100%;
+                border: none;
+                flex: 1;
+            }
+        </style>
+    </head>
     <body>
-        <div id="parallel"></div>
-        <script type="module" src="/index1.ts">
+        <div class="split">
+            <div class="view">
+                <div class="title">Traditional DOM</div>
+                <iframe class="content" src="/serial/"></iframe>
+                
+            </div>
+            <div class="separator"></div>
+            <div class="view">
+                <div class="title">Parallel DOM</div>
+                <iframe class="content" src="/parallel/"></iframe>
+                
+            </div>
+        </div>
+        
+        <script type="module" src="/index.ts">
         </script>
     </body>
 </html>

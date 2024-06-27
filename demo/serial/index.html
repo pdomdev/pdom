@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <style>
+            body {
+                margin: 8px;
+                font-family: monospace;
+            }
+
+            .header {
+                display: flex;
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .fps {
+                flex: 1;
+            }
+            
+            .loader {
+                width: 32px;
+                font-size: 32px;
+                margin-right: 0px;
+                box-sizing: border-box;
+                border: 8px solid black;
+            }
+        </style>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+    </head>
+    <body>
+        <div class="header">
+            <div id="loader" class="loader"></div>
+            <div class="fps" id="fps"></div>
+            </div>
+        </div>
+        <div id="container"></div>
+        <script type="module" src="index.ts">
+        </script>
+    </body>
+</html>
