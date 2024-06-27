@@ -59,12 +59,12 @@ export default class PDom {
             return;
         }
 
-        const { nodeType, attrs } = this.getNodeTypeAndAttrs(this.el);
+        const nodeOuterHTML = this.el.outerHTML;
         this.#iframeSrc = generateIframeSrc(options.domainUrl);
         this.#iframeEl = this.getIframeEl(this.#iframeSrc);
         this.on('pdom-init', async (data) => {
             const { scriptUrl } = this.options;
-            return { nodeType, attrs, scriptUrl };
+            return { nodeOuterHTML, scriptUrl };
         });
     }
 
@@ -104,24 +104,6 @@ export default class PDom {
                 reject(err);
             });
         });
-    }
-
-    private getNodeTypeAndAttrs(el: HTMLElement) {
-        let nodeType = el.nodeName.toLowerCase();
-        let attrs = {};
-        if (el.hasAttributes()) {
-            attrs = Array.from(el.attributes).reduce((acc, attr) => {
-                acc[attr.name] = attr.value;
-                return acc;
-            }, {});
-        }
-        if (el.id) {
-            attrs['id'] = el.id;
-        }
-        if (el.classList.length) {
-            attrs['class'] = Array.from(el.classList).join(' ');
-        }
-        return { nodeType, attrs };
     }
 
     private getIframeEl(iframeSrc: string) {
