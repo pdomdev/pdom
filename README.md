@@ -1,4 +1,4 @@
-<div style="width:32px;height:32px;border:8px solid #777;transform:rotateZ(10deg);box-shadow:0 1px 6px rgba(255, 255, 255, 0.12), 0 1px 4px rgba(255, 255, 255, 0.24);margin:0 auto;" align="center"></div>
+<div style="width:32px;height:32px;border:8px solid #777;transform:rotateZ(10deg);box-shadow:0 1px 6px rgba(255, 255, 255, 0.12), 0 1px 4px rgba(255, 255, 255, 0.24);"></div>
 <br/>
 <br/>
 
