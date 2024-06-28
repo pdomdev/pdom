@@ -3,10 +3,12 @@
 <img width="84" height="84" src="https://cdn.jsdelivr.net/gh/pdomdev/pdom/assets/pdom.svg" />
 </p>
 
-# Parallel DOM 
+# <div><div align="center">Parallel DOM</div></div>
+<div align="left">
+    <a href="https://badge.fury.io/js/parallel-dom"><img src="https://badge.fury.io/js/parallel-dom.svg" alt="npm version" height="18"></a>
+</div>
 
-
-[![npm version](https://badge.fury.io/js/parallel-dom.svg)](https://badge.fury.io/js/parallel-dom)
+<br/>
 
 Make your apps faster, parallelize away heavy DOM operations.
 
