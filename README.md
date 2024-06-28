@@ -4,10 +4,7 @@
 </p>
 <br/>
 
-# Parallel DOM
-<div align="left">
-    <a href="https://badge.fury.io/js/parallel-dom"><img src="https://badge.fury.io/js/parallel-dom.svg" alt="npm version" height="18"></a>
-</div>
+# Parallel DOM  [![npm version](https://badge.fury.io/js/parallel-dom.svg)](https://badge.fury.io/js/parallel-dom)
 
 <br/>
 
