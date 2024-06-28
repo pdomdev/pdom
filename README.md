@@ -2,8 +2,9 @@
 <p align="center">
 <img width="84" height="84" src="https://cdn.jsdelivr.net/gh/pdomdev/pdom/assets/pdom.svg" />
 </p>
+<br/>
 
-# <div><div align="center">Parallel DOM</div></div>
+# Parallel DOM
 <div align="left">
     <a href="https://badge.fury.io/js/parallel-dom"><img src="https://badge.fury.io/js/parallel-dom.svg" alt="npm version" height="18"></a>
 </div>
