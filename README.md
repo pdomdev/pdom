@@ -1,6 +1,6 @@
 
 <p align="center">
-<img width="64" height="64" src="https://cdn.jsdelivr.net/gh/pdomdev/pdom/assets/pdom.svg" />
+<img width="84" height="84" src="https://cdn.jsdelivr.net/gh/pdomdev/pdom/assets/pdom.svg" />
 </p>
 
 # Parallel DOM 
