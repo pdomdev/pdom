@@ -1,8 +1,12 @@
-<div style="width:32px;height:32px;border:8px solid #777;transform:rotateZ(10deg);box-shadow:0 1px 6px rgba(255, 255, 255, 0.12), 0 1px 4px rgba(255, 255, 255, 0.24);"></div>
-<br/>
-<br/>
 
-# Parallel DOM [![npm version](https://badge.fury.io/js/parallel-dom.svg)](https://badge.fury.io/js/parallel-dom)
+<p align="center">
+<img width="64" height="64" src="https://cdn.jsdelivr.net/gh/pdomdev/pdom/assets/pdom.svg" />
+</p>
+
+# Parallel DOM 
+
+
+[![npm version](https://badge.fury.io/js/parallel-dom.svg)](https://badge.fury.io/js/parallel-dom)
 
 Make your apps faster, parallelize away heavy DOM operations.
 
