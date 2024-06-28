@@ -16,8 +16,13 @@ Make your apps faster, parallelize away heavy DOM operations.
 import PDom from 'parallel-dom';
 
 const pdom = new PDom(
-    '#element',
-    () => import('path/to/script/which/runs/in/parallel')
+    // The root, the subtree will be 
+    // made parallel.
+    '#root', 
+
+    // Javascript entry point of the script 
+    // to run parallely inside the parallel subtree.
+    () => import('path/to/script/which/runs/in/parallel') 
 );
 pdom.render();
 ```
