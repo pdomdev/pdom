@@ -6,10 +6,9 @@
 
 # Parallel DOM  [![npm version](https://badge.fury.io/js/parallel-dom.svg)](https://badge.fury.io/js/parallel-dom)
 
-<br/>
-
 Make your apps faster, parallelize away heavy DOM operations.
 
+<br/>
 
 ## Usage
 
