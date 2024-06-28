@@ -59,12 +59,12 @@ export default class PDom {
             return;
         }
 
-        const nodeOuterHTML = this.el.outerHTML;
+        const { nodeOuterHTML, cssText } = getOuterHTMLAndStyleString(this.el);
         this.#iframeSrc = generateIframeSrc(options.domainUrl);
         this.#iframeEl = this.getIframeEl(this.#iframeSrc);
         this.on('pdom-init', async (data) => {
             const { scriptUrl } = this.options;
-            return { nodeOuterHTML, scriptUrl };
+            return { nodeOuterHTML, cssText, scriptUrl };
         });
     }
 
@@ -135,4 +135,15 @@ export default class PDom {
         }
         this.callbacks[type].push(cb);
     }
+}
+
+function getOuterHTMLAndStyleString(el: HTMLElement) {
+    const nodeOuterHTML = el.outerHTML;
+    const styles = getComputedStyle(el);
+    let cssText = '';
+    for (let i = 0; i < styles.length; i++) {
+        const prop = styles[i];
+        cssText += `${prop}: ${styles.getPropertyValue(prop)};`;
+    }
+    return { nodeOuterHTML, cssText };
 }

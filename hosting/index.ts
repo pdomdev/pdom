@@ -2,8 +2,10 @@ import { onMessage, sendMessage } from 'promise-postmessage';
 import { inject } from "@vercel/analytics"
 inject();
 
-function createElement(nodeOuterHTML) {
+function createElement(nodeOuterHTML, cssText) {
     document.body.insertAdjacentHTML('afterbegin', nodeOuterHTML);
+    const targetEl = document.body.firstElementChild as HTMLElement;
+    targetEl.style.cssText = cssText;
 }
 
 
@@ -27,8 +29,8 @@ const reponse = await sendMessage(window.parent, { _type: 'pdom-init' }, {
     origin: hostOrigin,
     needsResponse: true,
 });
-const { nodeOuterHTML, scriptUrl } = reponse;
-createElement(nodeOuterHTML);
+const { nodeOuterHTML, cssText, scriptUrl } = reponse;
+createElement(nodeOuterHTML, cssText);
 const fqnScriptUrl = (scriptUrl.startsWith('http'))
     ? scriptUrl
     : new URL(scriptUrl, hostOrigin).href;

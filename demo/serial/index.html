@@ -5,6 +5,9 @@
                 margin: 8px;
                 font-family: monospace;
                 overflow: hidden;
+                display: flex;
+                flex-direction: column;
+                height: 100vh;
             }
 
             .header {
@@ -29,6 +32,7 @@
                 display: flex;
                 flex-direction: column;
                 align-items: center;
+                flex: 1;
             }
 
         </style>
@@ -38,7 +42,6 @@
         <div class="header">
             <div id="loader" class="loader"></div>
             <div class="fps" id="fps"></div>
-            </div>
         </div>
         <div class="container" id="container"></div>
         <script type="module" src="index.ts">
