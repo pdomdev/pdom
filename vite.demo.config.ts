@@ -17,6 +17,7 @@ export default defineConfig({
                 serial: resolve('demo', 'serial/index.html'),
                 parallel: resolve('demo', 'parallel/index.html'),
                 react: resolve('demo', 'react/index.html'),
+                busy: resolve('demo', 'react/busy.tsx')
             },
         },
     }

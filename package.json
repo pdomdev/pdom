@@ -8,6 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "vite",
     "demo": "vite -c vite.demo.config.ts",
+    "preview-demo": "vite preview -c vite.demo.config.ts",
     "site": "vite -c vite.site.config.ts",
     "build-site": "vite build -c vite.site.config.ts",
     "build-demo": "vite build -c vite.demo.config.ts",
