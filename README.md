@@ -77,3 +77,10 @@ For more details:
 
 - [Performance isolation with the Origin-Agent-Cluster header](https://web.dev/articles/origin-agent-cluster)
 
+
+## Supported Browsers
+
+- Chrome
+- Edge
+
+Degrades to single threaded, on unsupported browsers.
