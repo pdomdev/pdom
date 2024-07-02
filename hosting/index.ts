@@ -10,9 +10,13 @@ const defaultRunner = async (scriptUrls) => {
 }
 
 const FrameworkRunners = {
-    'react': async ([react, reactDOM, app]) => {
-        const { default: React } = await import(react);
-        const { default: ReactDOM } = await import(reactDOM);
+    'react': async ([app], version) => {
+        const { default: React } = await import(
+            `https://esm.sh/stable/react@${version}/es2022/react.mjs`
+        );
+        const { default: ReactDOM } = await import(
+            `https://esm.sh/stable/react-dom@${version}/es2022/client.js`
+        );
         const { default: App } = await import(app);
         const callbacks = {};
         function getProps(props) {
@@ -72,14 +76,20 @@ const reponse = await sendMessage(window.parent, { _type: 'pdom-init' }, {
     origin: hostOrigin,
     needsResponse: true,
 });
-const { nodeOuterHTML, cssText, scriptUrls, framework } = reponse;
+const {
+    nodeOuterHTML,
+    cssText,
+    scriptUrls,
+    framework,
+    frameworkVersion
+} = reponse;
 createElement(nodeOuterHTML, cssText);
 const fqnScriptUrls = scriptUrls.map(scriptUrl => (scriptUrl.startsWith('http'))
     ? scriptUrl
     : new URL(scriptUrl, hostOrigin).href);
 
 const runner = FrameworkRunners[framework] || defaultRunner;
-await runner(fqnScriptUrls);
+await runner(fqnScriptUrls, frameworkVersion);
 
 sendMessage(window.parent, { _type: 'pdom-loaded' }, {
     origin: hostOrigin,

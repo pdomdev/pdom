@@ -26,6 +26,7 @@ export default class PDom {
     private el: HTMLElement;
     #iframeSrc: string;
     protected framework: string;
+    protected frameworkVersion: string;
     private isLoaded: Promise<void>;
 
     public get iframeSrc() {
@@ -71,7 +72,13 @@ export default class PDom {
         this.#iframeEl = this.getIframeEl(this.#iframeSrc);
         this.on('pdom-init', async (data) => {
             const { scriptUrls } = this.options;
-            return { nodeOuterHTML, cssText, scriptUrls, framework: this.framework };
+            return {
+                nodeOuterHTML,
+                cssText,
+                scriptUrls,
+                framework: this.framework,
+                frameworkVersion: this.frameworkVersion,
+            };
         });
     }
 

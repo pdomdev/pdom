@@ -3,6 +3,7 @@ import PDomClass from '.';
 
 class PDomReact extends PDomClass {
     protected framework = 'react';
+    protected frameworkVersion = React.version;
 
     public setProps(props) {
         this.sendMessage({
@@ -22,8 +23,6 @@ function PDom<T extends React.ComponentType<any>>(importFn: () => Promise<{ defa
         React.useEffect(() => {
             const pDom = new PDomReact(containerRef.current, {
                 scripts: [
-                    () => import('react'),
-                    () => import('react-dom/client'),
                     importFn,
                 ],
                 domainUrl: 'https://react.pdom.dev'
