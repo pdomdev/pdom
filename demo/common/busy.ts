@@ -10,6 +10,8 @@ container.appendChild(text);
 
 const chartContainer = document.createElement('div');
 chartContainer.id = 'chart';
+chartContainer.style.width = '100%';
+chartContainer.style.flex = '1 1 0';
 container.appendChild(chartContainer);
 
 let formatter = Intl.NumberFormat('en', { notation: 'compact' });
