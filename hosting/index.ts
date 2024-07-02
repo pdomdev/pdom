@@ -12,9 +12,11 @@ const defaultRunner = async (scriptUrls) => {
 const FrameworkRunners = {
     'react': async ([app], version) => {
         const { default: React } = await import(
+            /* @vite-ignore */
             `https://esm.sh/stable/react@${version}/es2022/react.mjs`
         );
         const { default: ReactDOM } = await import(
+            /* @vite-ignore */
             `https://esm.sh/stable/react-dom@${version}/es2022/client.js`
         );
         const { default: App } = await import(app);
