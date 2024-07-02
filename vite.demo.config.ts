@@ -8,6 +8,7 @@ export default defineConfig({
         preserveSymlinks: true,
     },
     build: {
+        modulePreload: false,
         target: 'esnext',
         outDir: 'dist',
         rollupOptions: {
