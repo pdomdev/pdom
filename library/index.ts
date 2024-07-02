@@ -34,6 +34,10 @@ export default class PDom {
         return this.#iframeEl || this.el;
     }
 
+    public get scriptUrl() {
+        return this.options.scriptUrl;
+    }
+
     constructor(_el: HTMLElement | string, options: PDomOptions | (() => Promise<any>)) {
         console.log('PDom constructor');
         if (!_el) {
@@ -134,6 +138,17 @@ export default class PDom {
             this.callbacks[type] = [];
         }
         this.callbacks[type].push(cb);
+    }
+
+    public sendMessage(data: any) {
+        return sendMessage(this.#iframeEl, data, {
+            origin: this.#iframeSrc,
+            endpoint: 'parent'
+        });
+    }
+
+    public onMessage(cb: (data) => any) {
+        return onMessage(cb, this.#iframeEl, 'parent');
     }
 }
 

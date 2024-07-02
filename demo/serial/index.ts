@@ -8,11 +8,6 @@
 // );
 import '../common/busy';
 import '../common/loader';
-import { FPSMeter } from '../common/fps';
+import '../common/fps';
 
-
-const fps = new FPSMeter({
-    container: document.querySelector('#fps'),
-});
-fps.start();
 

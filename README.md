@@ -27,6 +27,25 @@ const pdom = new PDom(
 pdom.render();
 ```
 
+### React
+
+```jsx
+import PDom from 'parallel-dom/react';
+
+export const MyComponent = () => {
+    return <>
+        ...
+        <PDom 
+            className="my-class" 
+            script={() => import(
+                'path/to/script/which/runs/in/parallel'
+            )}>
+            <Child></Child> {/* Optional children */}
+        </PDom>
+    </>
+}
+```
+
 ## Under the hood
 
 1. Creates an iframe on a `https://<hash>.pdom.dev` domain.

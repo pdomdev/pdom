@@ -15,6 +15,7 @@ export default defineConfig({
                 main: resolve('demo', 'index.html'),
                 serial: resolve('demo', 'serial/index.html'),
                 parallel: resolve('demo', 'parallel/index.html'),
+                react: resolve('demo', 'react/index.html'),
             },
         },
     }

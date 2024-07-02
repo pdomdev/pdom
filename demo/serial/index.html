@@ -12,6 +12,8 @@
 
             .header {
                 display: flex;
+                flex-direction: column;
+                align-items: center;
                 width: 100%;
                 margin-bottom: 10px;
             }
@@ -40,8 +42,8 @@
     </head>
     <body>
         <div class="header">
+            <div id="stats"></div>
             <div id="loader" class="loader"></div>
-            <div class="fps" id="fps"></div>
         </div>
         <div class="container" id="container"></div>
         <script type="module" src="index.ts">

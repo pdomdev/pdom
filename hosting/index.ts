@@ -2,6 +2,48 @@ import { onMessage, sendMessage } from 'promise-postmessage';
 import { inject } from "@vercel/analytics"
 inject();
 
+
+const defaultRunner = async (scriptUrls) => {
+    for (const scriptUrl of scriptUrls) {
+        await import(scriptUrl);
+    }
+}
+
+const FrameworkRunners = {
+    'react': async ([react, reactDOM, app], props) => {
+        const { default: React } = await import(react);
+        const { default: ReactDOM } = await import(reactDOM);
+        const { default: App } = await import(app);
+        const callbacks = {};
+        function getProps(props) {
+            const newProps = {};
+            for (const key in props) {
+                const value = props[key];
+                if (value === '__function__') {
+                    newProps[key] = callbacks[key] || ((...args) => {
+                        return sendMessage(window.parent, {
+                            _type: 'pdom-callback',
+                            callbackId: key,
+                            args,
+                        }, { origin: hostOrigin });
+                    });
+                    callbacks[key] = newProps[key];
+                } else {
+                    newProps[key] = value;
+                }
+            }
+        }
+
+
+        const root = ReactDOM.createRoot(document.body.firstElementChild as HTMLElement);
+        onMessage((message) => {
+            if (message._type === 'pdom-props') {
+                root.render(React.createElement(App), getProps(message.props));
+            }
+        }, window.parent, 'child')
+    },
+}
+
 function createElement(nodeOuterHTML, cssText) {
     document.body.insertAdjacentHTML('afterbegin', nodeOuterHTML);
     const targetEl = document.body.firstElementChild as HTMLElement;
@@ -29,17 +71,16 @@ const reponse = await sendMessage(window.parent, { _type: 'pdom-init' }, {
     origin: hostOrigin,
     needsResponse: true,
 });
-const { nodeOuterHTML, cssText, scriptUrl } = reponse;
+const { nodeOuterHTML, cssText, scriptUrls, framework, props } = reponse;
 createElement(nodeOuterHTML, cssText);
-const fqnScriptUrl = (scriptUrl.startsWith('http'))
+const fqnScriptUrls = scriptUrls.map(scriptUrl => (scriptUrl.startsWith('http'))
     ? scriptUrl
-    : new URL(scriptUrl, hostOrigin).href;
+    : new URL(scriptUrl, hostOrigin).href);
 
-await import(
-    /* @vite-ignore */
-    fqnScriptUrl
-);
+const runner = FrameworkRunners[framework] || defaultRunner;
+await runner(fqnScriptUrls, props);
 
 sendMessage(window.parent, { _type: 'pdom-loaded' }, {
     origin: hostOrigin,
 });
+
