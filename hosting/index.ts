@@ -39,7 +39,7 @@ const FrameworkRunners = {
         const root = ReactDOM.createRoot(document.body.firstElementChild as HTMLElement);
         onMessage((message) => {
             if (message._type === 'pdom-props') {
-                root.render(React.createElement(App), getProps(message.props));
+                root.render(React.createElement(App, getProps(message.props)));
             }
         }, window.parent, 'child')
     },
