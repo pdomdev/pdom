@@ -10,7 +10,7 @@ const defaultRunner = async (scriptUrls) => {
 }
 
 const FrameworkRunners = {
-    'react': async ([react, reactDOM, app], props) => {
+    'react': async ([react, reactDOM, app]) => {
         const { default: React } = await import(react);
         const { default: ReactDOM } = await import(reactDOM);
         const { default: App } = await import(app);
@@ -32,6 +32,7 @@ const FrameworkRunners = {
                     newProps[key] = value;
                 }
             }
+            return newProps;
         }
 
 
@@ -71,14 +72,14 @@ const reponse = await sendMessage(window.parent, { _type: 'pdom-init' }, {
     origin: hostOrigin,
     needsResponse: true,
 });
-const { nodeOuterHTML, cssText, scriptUrls, framework, props } = reponse;
+const { nodeOuterHTML, cssText, scriptUrls, framework } = reponse;
 createElement(nodeOuterHTML, cssText);
 const fqnScriptUrls = scriptUrls.map(scriptUrl => (scriptUrl.startsWith('http'))
     ? scriptUrl
     : new URL(scriptUrl, hostOrigin).href);
 
 const runner = FrameworkRunners[framework] || defaultRunner;
-await runner(fqnScriptUrls, props);
+await runner(fqnScriptUrls);
 
 sendMessage(window.parent, { _type: 'pdom-loaded' }, {
     origin: hostOrigin,

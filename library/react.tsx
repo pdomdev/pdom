@@ -2,6 +2,8 @@ import React from 'react';
 import PDomClass from '.';
 
 class PDomReact extends PDomClass {
+    protected framework = 'react';
+
     public setProps(props) {
         this.sendMessage({
             _type: 'pdom-props',
@@ -17,11 +19,15 @@ const PDom = (importFn: () => Promise<any>) => {
 
         React.useEffect(() => {
             const pDom = new PDomReact(containerRef.current, {
-                script: importFn
+                scripts: [
+                    () => import('react'),
+                    () => import('react-dom/client'),
+                    importFn,
+                ],
+                domainUrl: 'https://react.pdom.dev'
             });
-            pDom.render().then(() => {
-                ref.current = pDom;
-            });
+            pDom.render()
+            ref.current = pDom;
             pDom.onMessage((message) => {
                 if (message._type === 'pdom-callback') {
                     const { callbackId, args } = message;
@@ -40,7 +46,7 @@ const PDom = (importFn: () => Promise<any>) => {
                     newProps[key] = value;
                 }
             }
-            ref.current?.setProps?.(props);
+            ref.current?.setProps?.(newProps);
         }, [props]);
 
         return <div ref={containerRef} className="pdom"></div>

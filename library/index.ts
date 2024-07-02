@@ -2,7 +2,7 @@ import { onMessage, sendMessage } from 'promise-postmessage';
 import { getScriptUrlFromFunction } from './util';
 
 export interface PDomOptions {
-    script: () => Promise<any>;
+    scripts: Array<() => Promise<any>>;
     domainUrl?: string;
     noIframe?: boolean;
 }
@@ -22,9 +22,11 @@ function generateIframeSrc(origin?: string) {
 export default class PDom {
     #iframeEl: HTMLIFrameElement;
     private callbacks: Record<string, Function[]> = {};
-    private options: PDomOptions & { scriptUrl?: string };
+    private options: PDomOptions & { scriptUrls?: string[] };
     private el: HTMLElement;
     #iframeSrc: string;
+    protected framework: string;
+    private isLoaded: Promise<void>;
 
     public get iframeSrc() {
         return this.#iframeSrc;
@@ -34,8 +36,8 @@ export default class PDom {
         return this.#iframeEl || this.el;
     }
 
-    public get scriptUrl() {
-        return this.options.scriptUrl;
+    public get scriptUrls() {
+        return this.options.scriptUrls;
     }
 
     constructor(_el: HTMLElement | string, options: PDomOptions | (() => Promise<any>)) {
@@ -54,10 +56,11 @@ export default class PDom {
         }
 
         if (typeof options === 'function') {
-            options = { script: options };
+            options = { scripts: [options] };
         }
         this.options = options;
-        this.options.scriptUrl = getScriptUrlFromFunction(this.options.script);
+        this.options.scriptUrls = this.options.scripts
+            .map(s => getScriptUrlFromFunction(s));
 
         if (this.options.noIframe) {
             return;
@@ -67,8 +70,8 @@ export default class PDom {
         this.#iframeSrc = generateIframeSrc(options.domainUrl);
         this.#iframeEl = this.getIframeEl(this.#iframeSrc);
         this.on('pdom-init', async (data) => {
-            const { scriptUrl } = this.options;
-            return { nodeOuterHTML, cssText, scriptUrl };
+            const { scriptUrls } = this.options;
+            return { nodeOuterHTML, cssText, scriptUrls, framework: this.framework };
         });
     }
 
@@ -80,7 +83,7 @@ export default class PDom {
         if (this.options.noIframe) {
             return this.renderNoIframe();
         }
-        return new Promise<void>((resolve, reject) => {
+        this.isLoaded = new Promise<void>((resolve, reject) => {
             this.on('pdom-loaded', () => {
                 resolve();
             });
@@ -94,14 +97,15 @@ export default class PDom {
             this.el.replaceChildren(this.#iframeEl);
             this.subscribeToIframeMessages();
         });
+        return this.isLoaded;
     }
 
     private renderNoIframe() {
         return new Promise<void>((resolve, reject) => {
-            const { scriptUrl } = this.options;
+            const { scriptUrls } = this.options;
             import(
                 /* @vite-ignore */
-                scriptUrl
+                scriptUrls[0]
             ).then(() => {
                 resolve();
             }).catch((err) => {
@@ -140,7 +144,8 @@ export default class PDom {
         this.callbacks[type].push(cb);
     }
 
-    public sendMessage(data: any) {
+    public async sendMessage(data: any) {
+        await this.isLoaded;
         return sendMessage(this.#iframeEl, data, {
             origin: this.#iframeSrc,
             endpoint: 'parent'
