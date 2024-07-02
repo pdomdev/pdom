@@ -12,10 +12,12 @@ class PDomReact extends PDomClass {
     }
 }
 
-const PDom = (importFn: () => Promise<any>) => {
+function PDom<T extends React.ComponentType<any>>(importFn: () => Promise<{ default: T }>): T {
     const Component = React.lazy(importFn);
-    return React.forwardRef((props, ref) => {
+    return React.forwardRef<React.ComponentProps<typeof Component>>((props, ref) => {
         const containerRef = React.useRef(null);
+        const _ref = React.useRef(null);
+        const pDomRef = ref ?? _ref;
 
         React.useEffect(() => {
             const pDom = new PDomReact(containerRef.current, {
@@ -27,7 +29,7 @@ const PDom = (importFn: () => Promise<any>) => {
                 domainUrl: 'https://react.pdom.dev'
             });
             pDom.render()
-            ref.current = pDom;
+            pDomRef.current = pDom;
             pDom.onMessage((message) => {
                 if (message._type === 'pdom-callback') {
                     const { callbackId, args } = message;
@@ -46,7 +48,7 @@ const PDom = (importFn: () => Promise<any>) => {
                     newProps[key] = value;
                 }
             }
-            ref.current?.setProps?.(newProps);
+            pDomRef.current?.setProps?.(newProps);
         }, [props]);
 
         return <div ref={containerRef} className="pdom"></div>

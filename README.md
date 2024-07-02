@@ -12,6 +12,10 @@ Make your apps faster, parallelize away heavy DOM operations.
 
 ## Usage
 
+### Javascript
+
+[Example](https://github.com/pdomdev/pdom/demo/parallel) | [Demo](https://demo.pdom.dev/parallel/)
+
 ```js
 import PDom from 'parallel-dom';
 
@@ -29,22 +33,37 @@ pdom.render();
 
 ### React
 
+
+[Example](https://github.com/pdomdev/pdom/demo/react) | [Demo](https://demo.pdom.dev/react/)
+
+```jsx
+// parallel-component.tsx
+const ParallelComponent = ({ prop1, onCallback }) => {
+    // heavy operations.
+    // ...
+    return <button onClick={onCallback}>{prop1}</button>
+}
+```
+
 ```jsx
 import PDom from 'parallel-dom/react';
 
-export const MyComponent = () => {
+const ParallelComponent = PDom(() => import('./parallel-component'));
+
+export const App = () => {
+    const [p1, setP1] = useState('');
     return <>
         ...
-        <PDom 
-            className="my-class" 
-            script={() => import(
-                'path/to/script/which/runs/in/parallel'
-            )}>
-            <Child></Child> {/* Optional children */}
-        </PDom>
+        <ParallelComponent prop1={p1} onCallback={cb} />
     </>
 }
 ```
+
+#### React limitations
+
+1. Not supported: unserializable props (JSX in props etc.)
+2. Callbacks in Props are supported, but they are all async.
+
 
 ## Under the hood
 
