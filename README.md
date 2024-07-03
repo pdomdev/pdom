@@ -88,3 +88,19 @@ Degrades to single threaded, on unsupported browsers.
 ## Coming soon
 
 - Ability to self host the iframe, and not use the third party `pdom.dev`.
+
+## FAQ
+
+- What are you talking about ? iFrames suck!
+
+iFrames were once insecure and often used for nefarious purposes. Browser makers have introduced many new security requirements as either defaults or even removed the older insecure ways entirely. The technology has advanced significantly. Some of the security features PDom uses to secure the iframes:
+
+    - Sandboxing. Sanboxed Iframes create a secure context with no access to the parent's context.
+    
+    - In browser script injection. Your javascript is never hosted on PDom server. Its injected at runtime by your parent application to the frame.
+
+- I don't trust a third party domain. Can I host this myself ?
+
+Absolutely! The whole thing is open source, and we have included documentation on how to host this yourself. We have also built a Vercel template for you to quickly deploy the service if you use Vercel.
+
+FWIW, you could use any static hosting provider, like github pages, netlify etc. As PDom does not really need a backend server, it's purely client.
