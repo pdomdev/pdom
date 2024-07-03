@@ -67,7 +67,7 @@ export const App = () => {
 
 ## Under the hood
 
-1. Creates an iframe on a `https://<hash>.pdom.dev` domain.
+1. Creates a dummy shell iframe on a subdomain.
 2. Passes the scriptUrl and creates a clone of the passed DOM element to the above frame.
 3. The iframe loads and runs the script.
 4. Since, iframe is cross origin, the browser creates a dedicated process for it.
@@ -99,6 +99,16 @@ Quick deploy on Vercel.
 4. `npm run build`
 5. Serve the `dist` folder with your own static server (like nginx). Or could use [http-server](https://www.npmjs.com/package/http-server).
 6. You could also do `npm start` to run a local developement server.
+
+### Domain and header configuration
+
+- Configure the web server to add the following response header (Already done in the above template for vercel):
+
+```
+Origin-Agent-Cluster: ?1
+```
+
+- Configure a wildcard subdomain, with your DNS. [Here](docs/wildcard.md) is some documentation on how to do this with common Domain providers.
 
 
 ## FAQ
