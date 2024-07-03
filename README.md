@@ -85,9 +85,21 @@ For more details:
 
 Degrades to single threaded, on unsupported browsers.
 
-## Coming soon
+## Self hosted
 
-- Ability to self host the iframe, and not use the third party `pdom.dev`.
+Quick deploy on Vercel.
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fpdomdev%2Fpdom&project-name=pdom&redirect-url=pdom.dev&build-command=npm%20run%20build&output-directory=dist)
+
+### Your own infrastructure
+
+1. `git clone https://github.com/pdomdev/pdom`
+2. `cd pdom`
+3. `npm i`
+4. `npm run build`
+5. Serve the `dist` folder with your own static server (like nginx). Or could use [http-server](https://www.npmjs.com/package/http-server).
+6. You could also do `npm start` to run a local developement server.
+
 
 ## FAQ
 
