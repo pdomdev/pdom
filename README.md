@@ -84,3 +84,7 @@ For more details:
 - Edge
 
 Degrades to single threaded, on unsupported browsers.
+
+## Coming soon
+
+- Ability to self host the iframe, and not use the third party `pdom.dev`.
