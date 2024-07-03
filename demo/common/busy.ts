@@ -130,7 +130,10 @@ const chart = Highcharts.chart('chart', {
             useHTML: true
         },
         color: '#2CA02C',
-    }]
+    }],
+    credits: {
+        enabled: false,
+    }
 });
 
 let i = 0;
