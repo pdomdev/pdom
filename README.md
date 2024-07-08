@@ -125,12 +125,14 @@ iFrames were once insecure and often used for nefarious purposes. Browser makers
 ```
 Sandboxing:
 
-Sanboxed Iframes create a secure context with no access to the parent's context.
+Sanboxed Iframes create a secure context 
+with no access to the parent's context.
 ```
 ```    
 In browser script injection: 
 
-Your javascript is never hosted on PDom server. Its injected at runtime by your parent application to the frame.
+Your javascript is never hosted on PDom server. 
+Its injected at runtime by your parent application to the frame.
 ```
 <br/>
 
