@@ -67,6 +67,8 @@ export const App = () => {
 
 ## Under the hood
 
+![](assets/how-it-works.png)
+
 1. Creates a dummy shell iframe on a subdomain.
 2. Passes the scriptUrl and creates a clone of the passed DOM element to the above frame.
 3. The iframe loads and runs the script.
@@ -87,6 +89,9 @@ Degrades to single threaded, on unsupported browsers.
 
 ## Self hosted
 
+You can host PDom on your own if you want to avoid using the `pdom.dev` domain for some reason.
+
+### Vercel
 Quick deploy on Vercel.
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fpdomdev%2Fpdom&project-name=pdom&redirect-url=pdom.dev&build-command=npm%20run%20build&output-directory=dist)
