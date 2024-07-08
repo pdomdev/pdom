@@ -117,11 +117,11 @@
           id="nav-content"
         >
           <ul class="list-reset lg:flex justify-end flex-1 items-center">
-            <li class="mr-3 hide">
+            <li class="mr-3">
               <a
-                class="inline-block py-2 px-4 text-black font-bold no-underline"
-                href="#"
-                >Active</a
+                class="inline-block py-2 px-4 text-black no-underline"
+                href="#how-it-works"
+                >How it works</a
               >
             </li>
             <li class="mr-3">
@@ -243,6 +243,71 @@
         <div class="container mx-auto flex flex-col flex-wrap max-w-5xl">
             <div class="pb-8 text-xl font-semibold">How it works</div>
             <img class="max-w-2xl" src="/assets/how-it-works.png"/>
+        </div>  
+    </section>
+
+    <section id="self-hosted" class="bg-gray-50 border-b py-6">
+        <div class="container mx-auto flex flex-col flex-wrap max-w-5xl">
+            <div class="pb-8 text-xl font-semibold">Self hosted</div>
+            <div class="text-sm">You can host PDom on your own if you want to avoid using the `pdom.dev` domain for some reason.
+            </div>
+            <div class="text-l font-semibold pb-4 pt-8">Deploy with Vercel</div>
+            <a href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fnext.js%2Ftree%2Fcanary%2Fexamples%2Fhello-world"><img src="https://vercel.com/button" alt="Deploy with Vercel"/></a>
+            <div class="text-l font-semibold pb-4 pt-8">Your own infrastructure</div>
+            <ol class="list-decimal list-inside">
+                <li>`git clone https://github.com/pdomdev/pdom`</li>
+                <li>`cd pdom`</li>
+                <li>`npm i`</li>
+                <li>`npm run build`</li>
+                <li>Serve the `dist` folder with your own static server (like nginx). Or could use <a href=https://www.npmjs.com/package/http-server>http-server</a></li>
+                <li>You could also do `npm start` to run a local developement server.
+                </li>
+            </ol>
+
+        </div>  
+    </section>
+
+    <section id="faq" class="bg-white border-b py-6">
+        <div class="container mx-auto flex flex-col flex-wrap max-w-5xl">
+            <div class="pb-8 text-xl font-semibold">FAQ</div>
+            <ul class="list-inside list-none flex flex-col gap-4">
+                <li class="p-6 border-solid border-2 border-slate-100 rounded-3xl">
+                    <div class="pb-4">
+                        What are you talking about ? iFrames suck!
+                    </div>
+                    <div class="text-sm pb-4">
+                        iFrames were once insecure and often used for nefarious purposes. Browser makers have introduced many new security requirements as either defaults or even removed the older insecure ways entirely. The technology has advanced significantly. Some of the security features PDom uses to secure the iframes:
+                    </div>
+                    <div class="text-sm pb-2">
+                    
+                    Sandboxing:<br />
+
+                    Sanboxed Iframes create a secure context 
+                    with no access to the parent's context.
+                    
+                    </div>
+                    <div class="text-sm">
+                    
+                    In browser script injection:<br/>
+
+                    Your javascript is never hosted on PDom server. 
+                    Its injected at runtime by your parent application to the frame.
+                    
+                    </div>
+                </li>
+                <li class="p-6 border-solid border-2 border-slate-100 rounded-3xl">
+                    <div class="pb-4">
+                        I don't trust a third party domain (Think polyfill.io ...). Can I host this myself ?
+                    </div>
+                    <div class="text-sm pb-4">
+                        Absolutely! The whole thing is open source, and we have included documentation on how to host this yourself. We have also built a Vercel template for you to quickly deploy the service if you use Vercel.
+                        <br/><br />
+
+                        FWIW, you could use any static hosting provider, like github pages, netlify etc. As PDom does not really need a backend server, it's purely client.
+
+                    </div>
+                </li>
+            </ul>
         </div>  
     </section>
 
