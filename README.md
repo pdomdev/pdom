@@ -122,9 +122,17 @@ Origin-Agent-Cluster: ?1
 
 iFrames were once insecure and often used for nefarious purposes. Browser makers have introduced many new security requirements as either defaults or even removed the older insecure ways entirely. The technology has advanced significantly. Some of the security features PDom uses to secure the iframes:
 
-    - Sandboxing. Sanboxed Iframes create a secure context with no access to the parent's context.
-    
-    - In browser script injection. Your javascript is never hosted on PDom server. Its injected at runtime by your parent application to the frame.
+```
+Sandboxing:
+
+Sanboxed Iframes create a secure context with no access to the parent's context.
+```
+```    
+In browser script injection: 
+
+Your javascript is never hosted on PDom server. Its injected at runtime by your parent application to the frame.
+```
+<br/>
 
 - I don't trust a third party domain. Can I host this myself ?
 
