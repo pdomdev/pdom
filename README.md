@@ -10,7 +10,23 @@ Make your apps faster, parallelize away heavy DOM operations.
 
 <br/>
 
+* [Usage](#usage)
+    * [Javascript](#javascript)
+    * [React](#react)
+        * [React limitations](#react-limitations)
+* [Under the hood](#under-the-hood)
+* [Supported Browsers](#supported-browsers)
+* [Self hosted](#self-hosted)
+    * [Vercel](#vercel)
+    * [Your own infrastructure](#your-own-infrastructure)
+        * [Domain and header configuration](#domain-and-header-configuration)
+* [FAQ](#faq)
+
 ## Usage
+
+```
+$ npm i parallel-dom
+```
 
 ### Javascript
 
