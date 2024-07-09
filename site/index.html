@@ -275,7 +275,7 @@
         <div class="container mx-auto flex flex-col flex-wrap max-w-5xl">
             <div class="pb-8 text-xl font-semibold">FAQ</div>
             <ul class="list-inside list-none flex flex-col gap-4">
-                <li class="p-6 border-solid border-2 border-slate-100 rounded-3xl">
+                <li class="p-6 border-solid border border-slate-200 rounded-3xl">
                     <div class="pb-4">
                         What are you talking about ? iFrames suck!
                     </div>
@@ -299,12 +299,24 @@
                     
                     </div>
                 </li>
-                <li class="p-6 border-solid border-2 border-slate-100 rounded-3xl">
+                <li class="p-6 border-solid border border-slate-200 rounded-3xl">
                     <div class="pb-4">
-                        I don't trust a third party domain (Think polyfill.io ...). Can I host this myself ?
+                        Why not use Web Workers (or friends) instead of Iframes ? 
                     </div>
                     <div class="text-sm pb-4">
-                        Absolutely! The whole thing is open source, and we have included documentation on how to host this yourself. We have also built a Vercel template for you to quickly deploy the service if you use Vercel.
+                        Web workers do not have access to DOM. They are great for CPU intensive tasks, but not for DOM manipulation. PDom uses a dedicated CPU process for javascript and DOM manipulation.
+                        <br/><br />
+                        Visualizing data, animations, interactive infographics all require access to the DOM.
+                        <br/><br />
+                        There have been efforts (like <a class="text-blue-500 hover-underline decoration-1" href="https://github.com/ampproject/worker-dom">Worker DOM</a>) to replicate DOM manipulation in web workers, but are complex and have limitations.
+                    </div>
+                </li>
+                <li class="p-6 border-solid border border-slate-200 rounded-3xl">
+                    <div class="pb-4">
+                        This is great! But, I don't trust a third party domain (Think polyfill.io ...). Can I host this myself ?
+                    </div>
+                    <div class="text-sm pb-4">
+                        Absolutely! The whole thing is open source, and we have included <a class="text-blue-500" href="#self-hosted">documentation</a> on how to host this yourself. We have also built a Vercel template for you to quickly deploy the service if you use Vercel.
                         <br/><br />
 
                         FWIW, you could use any static hosting provider, like github pages, netlify etc. As PDom does not really need a backend server, it's purely client.
@@ -313,248 +325,6 @@
                 </li>
             </ul>
         </div>  
-    </section>
-
-    <section class="bg-white border-b py-8 hide">
-      <div class="container mx-auto flex flex-wrap pt-4 pb-12">
-
-        <h2
-          class="w-full my-2 text-5xl font-black leading-tight text-center text-gray-800"
-        >
-          Title
-        </h2>
-        <div class="w-full mb-4">
-          <div
-            class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"
-          ></div>
-        </div>
-
-        <div class="w-full md:w-1/3 p-6 flex flex-col flex-grow flex-shrink">
-          <div
-            class="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow"
-          >
-            <a href="#" class="flex flex-wrap no-underline hover:no-underline">
-              <p class="w-full text-gray-600 text-xs md:text-sm px-6 mt-6">
-                GETTING STARTED
-              </p>
-              <div class="w-full font-bold text-xl text-gray-800 px-6">
-                Lorem ipsum dolor sit amet.
-              </div>
-              <p class="text-gray-600 text-base px-6 mb-5">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-                at ipsum eu nunc commodo posuere et sit amet ligula.
-              </p>
-            </a>
-          </div>
-          <div
-            class="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6"
-          >
-            <div class="flex items-center justify-start">
-              <button
-                class="mx-auto lg:mx-0 hover:underline gradient2 text-gray-800 font-extrabold rounded my-6 py-4 px-8 shadow-lg"
-              >
-                Action
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div class="w-full md:w-1/3 p-6 flex flex-col flex-grow flex-shrink">
-          <div
-            class="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow"
-          >
-            <a href="#" class="flex flex-wrap no-underline hover:no-underline">
-              <p class="w-full text-gray-600 text-xs md:text-sm px-6 mt-6">
-                GETTING STARTED
-              </p>
-              <div class="w-full font-bold text-xl text-gray-800 px-6">
-                Lorem ipsum dolor sit amet.
-              </div>
-              <p class="text-gray-600 text-base px-6 mb-5">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-                at ipsum eu nunc commodo posuere et sit amet ligula.
-              </p>
-            </a>
-          </div>
-          <div
-            class="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6"
-          >
-            <div class="flex items-center justify-center">
-              <button
-                class="mx-auto lg:mx-0 hover:underline gradient2 text-gray-800 font-extrabold rounded my-6 py-4 px-8 shadow-lg"
-              >
-                Action
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div class="w-full md:w-1/3 p-6 flex flex-col flex-grow flex-shrink">
-          <div
-            class="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow"
-          >
-            <a href="#" class="flex flex-wrap no-underline hover:no-underline">
-              <p class="w-full text-gray-600 text-xs md:text-sm px-6 mt-6">
-                GETTING STARTED
-              </p>
-              <div class="w-full font-bold text-xl text-gray-800 px-6">
-                Lorem ipsum dolor sit amet.
-              </div>
-              <p class=" text-gray-600 text-base px-6 mb-5">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-                at ipsum eu nunc commodo posuere et sit amet ligula.
-              </p>
-            </a>
-          </div>
-          <div
-            class="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6"
-          >
-            <div class="flex items-center justify-end">
-              <button
-                class="mx-auto lg:mx-0 hover:underline gradient2 text-gray-800 font-extrabold rounded my-6 py-4 px-8 shadow-lg"
-              >
-                Action
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="bg-gray-100 py-8 hide">
-      <div class="container mx-auto px-2 pt-4 pb-12 text-gray-800">
-        <h2
-          class="w-full my-2 text-5xl font-black leading-tight text-center text-gray-800"
-        >
-          Pricing
-        </h2>
-        <div class="w-full mb-4">
-          <div
-            class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"
-          ></div>
-        </div>
-
-        <div
-          class="flex flex-col sm:flex-row justify-center pt-12 my-12 sm:my-4"
-        >
-          <div
-            class="flex flex-col w-5/6 lg:w-1/4 mx-auto lg:mx-0 rounded-none lg:rounded-l-lg bg-white mt-4"
-          >
-            <div
-              class="flex-1 bg-white text-gray-600 rounded-t rounded-b-none overflow-hidden shadow"
-            >
-              <div class="p-8 text-3xl font-bold text-center border-b-4">
-                Free
-              </div>
-              <ul class="w-full text-center text-sm">
-                <li class="border-b py-4">Thing</li>
-                <li class="border-b py-4">Thing</li>
-                <li class="border-b py-4">Thing</li>
-              </ul>
-            </div>
-            <div
-              class="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6"
-            >
-              <div
-                class="w-full pt-6 text-3xl text-gray-600 font-bold text-center"
-              >
-                £0 <span class="text-base">for one user</span>
-              </div>
-              <div class="flex items-center justify-center">
-                <button
-                  class="mx-auto lg:mx-0 hover:underline gradient2 text-gray-800 font-bold rounded my-6 py-4 px-8 shadow-lg"
-                >
-                  Sign Up
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div
-            class="flex flex-col w-5/6 lg:w-1/3 mx-auto lg:mx-0 rounded-lg bg-white mt-4 sm:-mt-6 gradient shadow hover:shadow-lg z-10"
-          >
-            <div class="flex-1 rounded-t rounded-b-none overflow-hidden">
-              <div class="w-full p-8 text-3xl font-bold text-center">Basic</div>
-              <ul class="w-full text-center text-base font-bold">
-                <li class="py-4">Thing</li>
-                <li class="py-4">Thing</li>
-                <li class="py-4">Thing</li>
-                <li class="py-4">Thing</li>
-              </ul>
-            </div>
-            <div
-              class="flex-none mt-auto rounded-b rounded-t-none overflow-hidden p-6"
-            >
-              <div class="w-full pt-6 text-4xl font-bold text-center">
-                £x.99 <span class="text-base">/ per user</span>
-              </div>
-              <div class="flex items-center justify-center">
-                <button
-                  class="mx-auto lg:mx-0 hover:underline gradient2 text-gray-800 font-bold rounded my-6 py-4 px-8 shadow-lg"
-                >
-                  Sign Up
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div
-            class="flex flex-col w-5/6 lg:w-1/4 mx-auto lg:mx-0 rounded-none lg:rounded-l-lg bg-white mt-4"
-          >
-            <div
-              class="flex-1 bg-white text-gray-600 rounded-t rounded-b-none overflow-hidden shadow"
-            >
-              <div class="p-8 text-3xl font-bold text-center border-b-4">
-                Pro
-              </div>
-              <ul class="w-full text-center text-sm">
-                <li class="border-b py-4">Thing</li>
-                <li class="border-b py-4">Thing</li>
-                <li class="border-b py-4">Thing</li>
-              </ul>
-            </div>
-            <div
-              class="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6"
-            >
-              <div
-                class="w-full pt-6 text-3xl text-gray-600 font-bold text-center"
-              >
-                £x.99 <span class="text-base">/ per user</span>
-              </div>
-              <div class="flex items-center justify-center">
-                <button
-                  class="mx-auto lg:mx-0 hover:underline gradient2 text-gray-800 font-bold rounded my-6 py-4 px-8 shadow-lg"
-                >
-                  Sign Up
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="gradient w-full mx-auto text-center pt-6 pb-12 hide">
-      <h2
-        class="w-full my-2 text-5xl font-black leading-tight text-center text-white"
-      >
-        Call to Action
-      </h2>
-      <div class="w-full mb-4">
-        <div
-          class="h-1 mx-auto bg-white w-1/6 opacity-25 my-0 py-0 rounded-t"
-        ></div>
-      </div>
-
-      <h3 class="my-4 text-3xl font-extrabold">
-        Main Hero Message to sell yourself!
-      </h3>
-
-      <button
-        class="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded my-6 py-4 px-8 shadow-lg"
-      >
-        Action!
-      </button>
     </section>
 
     <!--Footer-->
