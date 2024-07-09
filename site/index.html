@@ -319,6 +319,21 @@
                 </li>
                 <li class="p-6 border-solid border border-slate-200 rounded-3xl">
                     <div class="pb-4">
+                        What browsers are currently supported ?
+                    </div>
+                    <div class="text-sm pb-4">
+                        Since we depend on the `Origin-Agent-Cluster` header being honored by the browser, we are currently limited to <b>Chrome</b> and <b>Edge</b>.
+                        <br/><br />
+                        The `Origin-Agent-Cluster` was designed in close collaboration with representatives from Mozilla Firefox who have marked it as <a href="https://mozilla.github.io/standards-positions/#domenic-origin-isolation" class="text-blue-500">worth prototyping</a>, and has <a href="https://lists.webkit.org/pipermail/webkit-dev/2020-August/031355.html" class="text-blue-500">a preliminary positive reception</a> from representatives of WebKit, the browser engine used by Safari.
+
+                        <br/><br />
+                        But in the meantime, there's no problem with deploying the Parallel-DOM to all your users today. Browsers which don't support it will just ignore it (and your site should still work as intended without perf benefits). And, since pages in origin-keyed agent clusters can actually do fewer things than site-keyed ones (the default), there's no interoperability issue to be worried about.
+                        <br/><br />
+                        Here is a web.dev article explaining <a href="https://web.dev/articles/origin-agent-cluster" class="text-blue-500">Origin-Agent-Cluster</a> in more detail.
+                    </div>
+                </li>
+                <li class="p-6 border-solid border border-slate-200 rounded-3xl">
+                    <div class="pb-4">
                         This is great! But, I don't trust a third party domain (Think polyfill.io ...). Can I host this myself ?
                     </div>
                     <div class="text-sm pb-4">
