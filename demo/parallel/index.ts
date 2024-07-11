@@ -7,3 +7,8 @@ const pdom = new PDom(
     () => import('../common/busy'),
 );
 pdom.render();
+
+if (!(window as any).originAgentCluster) {
+    const warning = document.getElementById('warning');
+    warning.style.display = 'block';
+}
