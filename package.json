@@ -1,9 +1,19 @@
 {
   "name": "parallel-dom",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "pdom",
   "module": "esm/library/index.js",
   "types": "esm/library/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./esm/library/index.js",
+      "types": "./esm/library/index.d.ts"
+    },
+    "./react": {
+      "import": "./esm/library/react.js",
+      "types": "./esm/library/react.d.ts"
+    }
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "vite",

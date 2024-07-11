@@ -249,22 +249,23 @@
       </div>
     </section>
 
-    <section id="how-it-works" class="bg-gray-100 border-b py-6">
+    <section id="how-it-works" class="bg-gray-100 border-b py-16">
         <div class="container mx-auto flex flex-col flex-wrap max-w-5xl">
             <div class="pb-8 text-xl font-semibold">How it works</div>
             <img class="max-w-2xl" src="/assets/how-it-works.png"/>
         </div>  
     </section>
 
-    <section id="self-hosted" class="bg-gray-50 border-b py-6">
+    <section id="self-hosted" class="bg-gray-50 border-b py-16">
         <div class="container mx-auto flex flex-col flex-wrap max-w-5xl">
-            <div class="pb-8 text-xl font-semibold">Self hosted</div>
+            <div class="pb-4 text-xl font-semibold">Self hosted</div>
             <div class="text-sm">You can host PDom on your own if you want to avoid using the `pdom.dev` domain for some reason.
             </div>
-            <div class="text-l font-semibold pb-4 pt-8">Deploy with Vercel</div>
+            <div class="text-lg font-semibold pb-4 pt-12">Deploy with Vercel</div>
+            <div class="pb-2 text-sm">Click the button below to use the preconfigured Vercel template with your own Vercel account.</div>
             <a href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fnext.js%2Ftree%2Fcanary%2Fexamples%2Fhello-world"><img src="https://vercel.com/button" alt="Deploy with Vercel"/></a>
-            <div class="text-l font-semibold pb-4 pt-8">Your own infrastructure</div>
-            <ol class="list-decimal list-inside">
+            <div class="text-lg font-semibold pb-4 pt-12">Your own infrastructure</div>
+            <ol class="list-decimal list-inside text-sm">
                 <li>`git clone https://github.com/pdomdev/pdom`</li>
                 <li>`cd pdom`</li>
                 <li>`npm i`</li>
@@ -273,11 +274,23 @@
                 <li>You could also do `npm start` to run a local developement server.
                 </li>
             </ol>
+            <div class="text-base font-semibold pb-4 pt-4">Domain and header configuration</div>
+            <ol class="list-disc list-inside text-sm">
+                <li>
+                    Configure the web server to add the following response header (Already done in the above template for vercel):
+                    <div class="py-4 px-6 border m-4 rounded-3xl">
+                        <code>Origin-Agent-Cluster: ?1</code>
+                    </div>
+                </li>
+                <li>
+                    Configure a wildcard subdomain, so that any `*.domain.tld` will serve the above hosted code. <a href="https://github.com/pdomdev/pdom/blob/main/docs/wildcard.md" class="text-blue-500">Here</a> is some documentation on how to do this with common Domain providers.
+                </li>
+            </ol>
 
         </div>  
     </section>
 
-    <section id="faq" class="bg-white border-b py-6">
+    <section id="faq" class="bg-white border-b py-16">
         <div class="container mx-auto flex flex-col flex-wrap max-w-5xl">
             <div class="pb-8 text-xl font-semibold">FAQ</div>
             <ul class="list-inside list-none flex flex-col gap-4">
