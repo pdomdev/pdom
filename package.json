@@ -1,13 +1,15 @@
 {
   "name": "parallel-dom",
-  "version": "0.7.1",
+  "version": "0.7.2",
   "description": "pdom",
   "module": "esm/library/index.js",
   "types": "esm/library/index.d.ts",
+  "main": "cjs/parallel-dom.js",
   "exports": {
     ".": {
       "import": "./esm/library/index.js",
-      "types": "./esm/library/index.d.ts"
+      "types": "./esm/library/index.d.ts",
+      "require": "./cjs/parallel-dom.js"
     },
     "./react": {
       "import": "./esm/library/react.js",
@@ -22,8 +24,9 @@
     "site": "vite -c vite.site.config.ts",
     "build-site": "vite build -c vite.site.config.ts",
     "build-demo": "vite build -c vite.demo.config.ts",
+    "build-lib": "vite build -c vite.lib.config.ts",
     "build": "tsc && vite build",
-    "prepublishOnly": "tsc"
+    "prepublishOnly": "tsc && build-lib"
   },
   "keywords": [],
   "author": "",
