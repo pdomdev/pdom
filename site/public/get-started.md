@@ -6,7 +6,7 @@ $ npm i parallel-dom
 
 ### Javascript
 
-[Example](https://github.com/pdomdev/pdom/demo/parallel) | [Demo](https://demo.pdom.dev/parallel/)
+[Example](https://github.com/pdomdev/pdom/tree/main/demo/parallel) | [Demo](https://demo.pdom.dev/parallel/)
 
 ```js
 import PDom from 'parallel-dom';
@@ -26,7 +26,7 @@ pdom.render();
 ### React
 
 
-[Example](https://github.com/pdomdev/pdom/demo/react) | [Demo](https://demo.pdom.dev/react/)
+[Example](https://github.com/pdomdev/pdom/tree/main/demo/react) | [Demo](https://demo.pdom.dev/react/)
 
 ```jsx
 // parallel-component.tsx
