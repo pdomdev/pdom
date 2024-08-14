@@ -2,7 +2,7 @@ import { onMessage, sendMessage } from 'promise-postmessage';
 import { getScriptUrlFromFunction } from './util';
 
 export interface PDomOptions {
-    scripts: Array<() => Promise<any>>;
+    scripts: Array<(() => Promise<any>) | string>;
     domainUrl?: string;
     noIframe?: boolean;
 }
@@ -42,7 +42,6 @@ export default class PDom {
     }
 
     constructor(_el: HTMLElement | string, options: PDomOptions | (() => Promise<any>)) {
-        console.log('PDom constructor');
         if (!_el) {
             throw new Error('Element is required');
         }

@@ -73,7 +73,6 @@ const host = params.get('host') as string;
 const scheme = params.get('scheme');
 const hostOrigin = `${scheme}://${host}`;
 
-console.log('hostOrigin', hostOrigin);
 const reponse = await sendMessage(window.parent, { _type: 'pdom-init' }, {
     origin: hostOrigin,
     needsResponse: true,
