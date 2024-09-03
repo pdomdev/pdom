@@ -51,10 +51,9 @@ const FrameworkRunners = {
     },
 }
 
-function createElement(nodeOuterHTML, cssText) {
+function createElement(nodeOuterHTML) {
     document.body.insertAdjacentHTML('afterbegin', nodeOuterHTML);
     const targetEl = document.body.firstElementChild as HTMLElement;
-    targetEl.style.cssText = cssText;
 }
 
 
@@ -79,12 +78,11 @@ const reponse = await sendMessage(window.parent, { _type: 'pdom-init' }, {
 });
 const {
     nodeOuterHTML,
-    cssText,
     scriptUrls,
     framework,
     frameworkVersion
 } = reponse;
-createElement(nodeOuterHTML, cssText);
+createElement(nodeOuterHTML);
 const fqnScriptUrls = scriptUrls.map(scriptUrl => (scriptUrl.startsWith('http'))
     ? scriptUrl
     : new URL(scriptUrl, hostOrigin).href);
