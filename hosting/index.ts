@@ -52,8 +52,12 @@ const FrameworkRunners = {
 }
 
 function createElement(nodeOuterHTML) {
-    document.body.insertAdjacentHTML('afterbegin', nodeOuterHTML);
-    const targetEl = document.body.firstElementChild as HTMLElement;
+    const template = document.createElement('template');
+    template.innerHTML = nodeOuterHTML;
+    const fragment = template.content;
+    const targetEl = fragment.firstElementChild as HTMLElement;
+    targetEl.style.cssText = 'width: 100%; height: 100%;';
+    document.body.appendChild(fragment);
 }
 
 
