@@ -56,7 +56,8 @@ function createElement(nodeOuterHTML) {
     template.innerHTML = nodeOuterHTML;
     const fragment = template.content;
     const targetEl = fragment.firstElementChild as HTMLElement;
-    targetEl.style.cssText = 'width: 100%; height: 100%;';
+    targetEl.style.width = '100%';
+    targetEl.style.height = '100%';
     document.body.appendChild(fragment);
 }
 
