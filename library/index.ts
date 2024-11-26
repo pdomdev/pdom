@@ -5,18 +5,22 @@ export interface PDomOptions {
     scripts: Array<(() => Promise<any>) | string>;
     domainUrl?: string;
     noIframe?: boolean;
+    disableOriginAgentCluster?: boolean;
 }
 
 const DOMAIN_SUFFIX = 'pdom.dev';
 
-function generateIframeSrc(origin?: string) {
+function generateIframeSrc(origin?: string, disableOriginAgentCluster?: boolean) {
     const randomUUID = crypto.randomUUID().slice(0, 8);
-    const params = new URLSearchParams({
-        host: window.location.host,
-        scheme: window.location.protocol.replace(':', ''),
-    });
     origin = origin || `https://${randomUUID}.${DOMAIN_SUFFIX}`;
-    return `${origin}?${params.toString()}`;
+    const url = new URL(origin);
+    const params = url.searchParams;
+    params.set('host', window.location.host);
+    params.set('scheme', window.location.protocol.replace(':', ''));
+    if (disableOriginAgentCluster) {
+        params.set('disable-origin-agent-cluster', 'true');
+    }
+    return url.href;
 }
 
 export default class PDom {
@@ -67,7 +71,8 @@ export default class PDom {
         }
 
         const { nodeOuterHTML, cssText } = getOuterHTMLAndStyleString(this.el);
-        this.#iframeSrc = generateIframeSrc(options.domainUrl);
+        this.#iframeSrc = generateIframeSrc(
+            options.domainUrl, options.disableOriginAgentCluster);
         this.#iframeEl = this.getIframeEl(this.#iframeSrc);
         this.on('pdom-init', async (data) => {
             const { scriptUrls } = this.options;

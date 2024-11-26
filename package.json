@@ -1,6 +1,6 @@
 {
   "name": "parallel-dom",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "description": "pdom",
   "module": "esm/library/index.js",
   "types": "esm/library/index.d.ts",
