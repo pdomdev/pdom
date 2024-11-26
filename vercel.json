@@ -1,6 +1,10 @@
 {
     "headers": [{
         "source": "/(.*)",
+        "missing": [{
+            "type": "query",
+            "key": "disable-origin-agent-cluster"
+        }],
         "headers": [{
             "key": "Origin-Agent-Cluster",
             "value": "?1"
