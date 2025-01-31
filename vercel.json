@@ -14,7 +14,7 @@
         "source": "/(.*)",
         "headers": [{
             "key": "Content-Security-Policy",
-            "value": "default-src 'self'; script-src *; style-src *; frame-ancestors *; form-action 'self'"
+            "value": "default-src 'self'; script-src * 'unsafe-eval'; style-src *; frame-ancestors *; form-action 'self'"
         }]
     }]
 }
